@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    IOperand *a = new Int8("50");
+    IOperand *a = new Int8("5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
     IOperand *b = new Int16("30");
     IOperand const *result = a->operator+(*b);
 

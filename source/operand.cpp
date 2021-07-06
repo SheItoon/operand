@@ -1,5 +1,7 @@
 #include "Operand.hpp"
 #include <string>
+#include <limits>
+#include <iostream>
 
 std::string enumToString(eOperandType t)
 {
@@ -37,8 +39,15 @@ IOperand const * Int8::operator+(const IOperand &rhs) const
     {
         case INT8:
         {
-            ret = new Int16(std::to_string(std::stol(this->value) + std::stol(rhs.toString())));
-            break;
+            try
+            {
+                ret = new Int8(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
+                break;
+            }
+            catch(const std::out_of_range& e)
+            {
+                std::cerr << e.what() << std::endl;
+            }
         }
         default:
         {
@@ -65,10 +74,16 @@ IOperand const * Int16::operator+(const IOperand &rhs) const
         case INT8:
         case INT16:
         {
-            ret = new Int16(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
-            break;
+            try
+            {
+                ret = new Int16(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
+                break;
+            }
+            catch(const std::exception &e)
+            {
+                std::cerr << e.what() << std::endl;
+            }
         }
     }
-
     return ret;
 }
