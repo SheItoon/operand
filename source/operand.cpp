@@ -37,7 +37,7 @@ IOperand const * Int8::operator+(const IOperand &rhs) const
     {
         case INT8:
         {
-            ret = new Int8(std::to_string(std::stod(this->value) + std::stod(rhs.toString())));
+            ret = new Int16(std::to_string(std::stol(this->value) + std::stol(rhs.toString())));
             break;
         }
         default:
@@ -65,7 +65,7 @@ IOperand const * Int16::operator+(const IOperand &rhs) const
         case INT8:
         case INT16:
         {
-            ret = new Int16(std::to_string(int16_t(std::stod(this->value) + std::stod(rhs.toString()))));
+            ret = new Int16(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
             break;
         }
     }

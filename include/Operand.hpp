@@ -1,15 +1,6 @@
-/*
-** EPITECH PROJECT, 2021
-** operand
-** File description:
-** operand
-*/
-
 #pragma once
 
 #include <string>
-#include <cstdint>
-#include <sstream>
 
 typedef enum eOperandType
 {

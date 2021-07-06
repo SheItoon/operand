@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2021
-** main
-** File description:
-** main
-*/
-
 #include "Operand.hpp"
 #include <iostream>
 
