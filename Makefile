@@ -5,7 +5,7 @@
 ## do stuff
 ##
 
-SRC	+=	
+SRC	+=	source/operand.cpp
 
 MAIN	+=	source/main.cpp
 
