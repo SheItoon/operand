@@ -1,4 +1,5 @@
 #include "Operand.hpp"
+#include <limits>
 
 std::string enumToString(eOperandType t)
 {

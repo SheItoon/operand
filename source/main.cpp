@@ -1,11 +1,12 @@
 #include "Operand.hpp"
+#include "Utils.hpp"
 #include <iostream>
 #include <limits>
 
 int main(void) try
 {
     IOperand *a = new Int8("1");
-    IOperand *b = new Int16(std::to_string(std::numeric_limits<int16_t>::max()));
+    IOperand *b = new Int8("-12555");
     IOperand const *result = a->operator+(*b);
 
     if (result)
@@ -16,5 +17,5 @@ int main(void) try
 } catch(std::exception const &e)
 { 
     std::cout << e.what() << std::endl;
-    return 1;
+    return 84;
 }
