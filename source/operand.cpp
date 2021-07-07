@@ -1,33 +1,14 @@
 #include "Operand.hpp"
+#include "Utils.hpp"
 #include <string>
 #include <limits>
 #include <iostream>
-
-std::string enumToString(eOperandType t)
-{
-    switch (t)
-    {
-    case INT8: return "INT8";
-    case INT16: return "INT16";
-        /*case INT32: return "INT32";
-    case FLOAT: return "FLOAT";
-    case DOUBLE: return "DOUBLE";
-    case BIGDECIMAL: return "BIGDECIMAL";*/
-    default: return "UNKNOWN";
-    }
-}
+#include <ranges>
 
 //INT8 CLASS
 Int8::Int8(std::string const &value)
-{   
-    try
-    {
-        throw value;
-    }
-    catch(std::string new_val)
-    {
-        this->value = new_val;
-    }
+{
+    this->value = value;
     this->type = INT8;
 }
 
@@ -38,22 +19,11 @@ IOperand const * Int8::operator+(const IOperand &rhs) const
     switch (rhs.getType())
     {
         case INT8:
-        {
-            try
-            {
-                ret = new Int8(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
-                break;
-            }
-            catch(const std::out_of_range& e)
-            {
-                std::cerr << e.what() << std::endl;
-            }
-        }
+            ret = new Int8(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
+            break;
         default:
-        {
             ret = rhs.operator+(*this);
             break;
-        }
     }
 
     return ret;
@@ -68,22 +38,19 @@ Int16::Int16(std::string const &value)
 IOperand const * Int16::operator+(const IOperand &rhs) const
 {
     IOperand *ret;
+    std::string test;
 
     switch (rhs.getType())
     {
         case INT8:
         case INT16:
-        {
-            try
-            {
-                ret = new Int16(std::to_string(std::stoll(this->value) + std::stoll(rhs.toString())));
-                break;
-            }
-            catch(const std::exception &e)
-            {
-                std::cerr << e.what() << std::endl;
-            }
-        }
+            int64_t test = std::stoll(this->value) + std::stoll(rhs.toString());
+            if (test > std::numeric_limits<int16_t>::max())
+                throw std::overflow_error(enumToString(this->type) + " overflow");
+            if (test < std::numeric_limits<int16_t>::min())
+                throw std::underflow_error(enumToString(this->type) + " underflow");
+            ret = new Int16(std::to_string(test));
+            break;
     }
     return ret;
 }

@@ -5,11 +5,12 @@
 ## do stuff
 ##
 
-SRC	+=	source/operand.cpp
+SRC	=	source/operand.cpp	\
+		source/utils.cpp
 
-MAIN	+=	source/main.cpp
+MAIN	=	source/main.cpp
 
-NAME	+=	operand
+NAME	=	operand
 
 OBJ	=	$(SRC:.cpp=.o)	\
 		$(MAIN:.cpp=.o)

@@ -48,5 +48,3 @@ public:
 
     IOperand const * operator+(const IOperand &rhs) const override;
 };
-
-std::string enumToString(eOperandType t);
