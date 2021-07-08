@@ -6,7 +6,7 @@
 int main(void) try
 {
     IOperand *a = new Int8("1");
-    IOperand *b = new Int8("-12555");
+    IOperand *b = new Int16("60");
     IOperand const *result = a->operator+(*b);
 
     if (result)

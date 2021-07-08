@@ -5,11 +5,11 @@
 #include <iostream>
 
 std::string enumToString(eOperandType t);
-template <class T, class A>
-std::string check_range(A const *a, A const *b);
+template <class T>
+std::string check_range(IOperand const *a, IOperand const *b);
 
-template <class T, class A>
-std::string check_range(A const *a, A const *b)
+template <class T>
+std::string check_range(IOperand const *a, IOperand const *b)
 {
     int64_t const test = std::stoll(a->toString()) + std::stoll(b->toString());
     if (test > std::numeric_limits<T>::max())

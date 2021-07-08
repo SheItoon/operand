@@ -21,30 +21,40 @@ public:
     virtual ~IOperand() {}
 };
 
-class AOperand : public IOperand
+template <typename T>
+class Operand : public IOperand
 {
-protected:
-    std::string value;
-    eOperandType type;
-};
+    public:
+        virtual std::string const &toString() const override;
+        virtual eOperandType getType() const override;
+        IOperand const * operator+(const IOperand &target) const override;/*
+        IOperand const * operator-(const IOperand &target) const override;
+        IOperand const * operator*(const IOperand &target) const override;
+        IOperand const * operator/(const IOperand &target) const override;
+        IOperand const * operator%(const IOperand &target) const override;*/
+        Operand(eOperandType type, const std::string & value);
+        ~Operand();
 
-class Int8 : public AOperand
+    protected:
+        std::string value;
+        eOperandType type;
+};
+template class Operand<int8_t>;
+template class Operand<int16_t>;
+template class Operand<int32_t>;
+template class Operand<float>;
+template class Operand<double>;
+
+class Int8 : public Operand<int8_t>
 {
 public:
     Int8(std::string const &value);
     ~Int8() {}
-    std::string const &toString(void) const override { return this->value; }
-    eOperandType getType(void) const override { return this->type; }
-    IOperand const * operator+(const IOperand &rhs) const override;
 };
 
-class Int16 : public AOperand
+class Int16 : public Operand<int16_t>
 {
 public:
     Int16(std::string const &value);
     ~Int16() {}
-    std::string const &toString(void) const override { return this->value; }
-    eOperandType getType(void) const override { return this->type; }
-
-    IOperand const * operator+(const IOperand &rhs) const override;
 };

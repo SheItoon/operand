@@ -4,13 +4,54 @@
 #include <limits>
 #include <iostream>
 
-//INT8 CLASS
-Int8::Int8(std::string const &value)
+//TEMPLATE
+template <typename T>
+Operand<T>::Operand(eOperandType type, const std::string &value)
 {
-    this->value = value;
-    this->type = INT8;
+	this->type = type;
+	this->value = value;
 }
 
+template <typename T>
+Operand<T>::~Operand()
+{
+
+}
+
+template <typename T>
+std::string const &Operand<T>::toString(void) const
+{
+	return this->value;
+}
+
+template <typename T>
+eOperandType Operand<T>::getType(void) const
+{
+	return this->type;
+}
+
+template <typename T>
+IOperand const *Operand<T>::operator+(IOperand const &rhs) const
+{
+    IOperand *ret;
+    std::string result = check_range<T>(this, &rhs);
+    ret = new Operand<T>(this->getType(), result);
+    /*
+    if (this->getPrecision() + rhs.getPrecision() == 0)
+        result = result.substr(0, result.find(".", 0));
+    else if (this->getPrecision() > rhs.getPrecision()) 
+        ret = vm.createOperand(this->getType(), result);
+    else
+        ret = vm.createOperand(rhs.getType(), result);*/
+    return ret;
+}
+
+//INT8 CLASS
+Int8::Int8(std::string const &value): Operand(INT8, value)
+{
+}
+
+/*
 IOperand const * Int8::operator+(const IOperand &rhs) const
 {
     IOperand const *ret;
@@ -18,22 +59,20 @@ IOperand const * Int8::operator+(const IOperand &rhs) const
     switch (rhs.getType())
     {
         case INT8:
-            ret = new Int8(check_range<int8_t, IOperand>(this, &(rhs)));
+            ret = new Int8(check_range<int8_t>(this, &(rhs)));
             break;
         default:
             ret = rhs.operator+(*this);
             break;
     }
-
     return ret;
-}
+}*/
 
-Int16::Int16(std::string const &value)
+Int16::Int16(std::string const &value): Operand(INT16, value)
 {
-    this->value = value;
-    this->type = INT16;
 }
 
+/*
 IOperand const * Int16::operator+(const IOperand &rhs) const
 {
     IOperand *ret;
@@ -42,8 +81,8 @@ IOperand const * Int16::operator+(const IOperand &rhs) const
     {
         case INT8:
         case INT16:
-            ret = new Int16(check_range<int16_t, IOperand>(this, &(rhs)));
+            ret = new Int16(check_range<int16_t>(this, &(rhs)));
             break;
     }
     return ret;
-}
+}*/
