@@ -6,7 +6,8 @@
 ##
 
 SRC	=	source/operand.cpp	\
-		source/utils.cpp
+		source/utils.cpp	\
+		source/register.cpp
 
 MAIN	=	source/main.cpp
 

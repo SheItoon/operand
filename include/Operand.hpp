@@ -1,8 +1,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
-#include <map>
 
 typedef enum eOperandType
 {
@@ -20,17 +18,6 @@ requires {
     typename std::vector<T>;
     typename size_t;
 };*/
-
-template<typename Key, typename Value>
-class Register
-{
-    public:
-        Value const getValueAt(Value) const;
-        bool push(Value);
-    private:
-        std::map<Key, Value> _reg;
-        size_t _membmax;
-};
 
 class IOperand
 {
