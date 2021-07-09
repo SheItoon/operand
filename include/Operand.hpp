@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
 typedef enum eOperandType
 {
@@ -25,6 +26,8 @@ public:
     virtual std::string const & toString() const = 0;
     virtual eOperandType getType() const = 0;
     virtual IOperand const * operator+(const IOperand &) const = 0;
+    virtual std::partial_ordering operator<=>(const IOperand &) const = 0;
+    virtual bool operator==(const IOperand &) const = 0;
     virtual ~IOperand() {}
 };
 
@@ -39,7 +42,9 @@ class Operand : public IOperand
         IOperand const * operator*(const IOperand &target) const override;
         IOperand const * operator/(const IOperand &target) const override;
         IOperand const * operator%(const IOperand &target) const override;*/
-        Operand(eOperandType type, const std::string & value);
+        std::partial_ordering operator<=>(const IOperand &rhs) const override;
+        bool operator==(const IOperand &rhs) const override;
+        Operand(eOperandType type, const std::string & value); 
         ~Operand();
 
     protected:

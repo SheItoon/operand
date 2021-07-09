@@ -46,6 +46,18 @@ IOperand const *Operand<T>::operator+(IOperand const &rhs) const
     return ret;
 }
 
+template <typename T>
+std::partial_ordering Operand<T>::operator<=>(IOperand const &rhs) const
+{
+    return std::stod(value) <=> std::stod(rhs.toString());
+}
+
+template <typename T>
+bool Operand<T>::operator==(IOperand const &rhs) const
+{
+    return std::stod(value) == std::stod(rhs.toString());
+}
+
 //INT8 CLASS
 Int8::Int8(std::string const &value): Operand(INT8, value)
 {

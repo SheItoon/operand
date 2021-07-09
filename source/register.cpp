@@ -65,6 +65,7 @@ bool Register<Key, Value>::push(int const rhs)
     if (index <= _membmax - 1)
     {
         _reg[index] = nullptr; // replace by stack.top()
+        //stack.pop();
         return true;
     }
     throw std::out_of_range("out of boundaries");
