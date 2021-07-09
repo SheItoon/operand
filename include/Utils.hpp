@@ -3,12 +3,14 @@
 #include "Operand.hpp"
 #include <string>
 #include <iostream>
+#include <concepts>
 
 std::string enumToString(eOperandType t);
 template <class T>
 std::string check_range(IOperand const *a, IOperand const *b);
 
 template <class T>
+    requires std::is_arithmetic_v<T>
 std::string check_range(IOperand const *a, IOperand const *b)
 {
     int64_t const test = std::stoll(a->toString()) + std::stoll(b->toString());

@@ -15,15 +15,15 @@ int main(void) try
 
     std::cout << (*a <= *b) << std::endl;
     //reg.push(a);
-    auto res = reg.getValueAt(10);
+    //auto res = reg.getValueAt(10);
     if (result)
         std::cout << "result" << std::endl
                 << "type: " << enumToString(result->getType()) << std::endl
                 << "value: " << result->toString() << std::endl;
-    if (res)
+    /*if (res)
         std::cout << "register" << std::endl
                 << "size: " << reg.getSize() << std::endl
-                << "value at " << res->toString() << ": " << enumToString(res->getType()) + " " << res->toString() << std::endl;
+                << "value at " << res->toString() << ": " << enumToString(res->getType()) + " " << res->toString() << std::endl;*/
     delete a;
     delete b;
     delete result;
