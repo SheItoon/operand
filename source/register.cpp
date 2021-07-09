@@ -1,9 +1,10 @@
 #include "Operand.hpp"
 #include "Register.hpp"
 #include <iostream>
+#include <map>
 
 template<typename Key, typename Value>
-Register<Key, Value>::Register(const int_fast8_t &&membmax)
+Register<Key, Value>::Register(const size_t membmax)
 {
     _membmax = membmax;
     _locked_size = true;
@@ -23,7 +24,7 @@ Register<Key, Value>::~Register()
 }
 
 template<typename Key, typename Value>
-bool Register<Key, Value>::setSize(const int_fast8_t &&membmax)
+bool Register<Key, Value>::setSize(const size_t membmax)
 {
     if (!_locked_size) 
     {
@@ -34,16 +35,17 @@ bool Register<Key, Value>::setSize(const int_fast8_t &&membmax)
 }
 
 template<typename Key, typename Value>
-Value const Register<Key, Value>::getValueAt(Value rhs) const
+Value Register<Key, Value>::getValueAt(int const rhs) const
 {
-    int_fast8_t index = -1;
+    size_t index = 0;
 
-    index = std::stoi(rhs->toString());
-    std::cout << "value is: " << index << std::endl;
-    if (index >= 0 && index <= _membmax - 1)
-        if (_reg.at(index) != nullptr)
+    if (rhs < 0)
+        throw std::range_error("negative range");
+    index = rhs;
+    if (index <= _membmax - 1)
+        if (_reg.contains(index) && _reg.at(index) != nullptr)
             return _reg.at(index);
-    return nullptr;
+    throw std::out_of_range("no member found");
 }
 
 template<typename Key, typename Value>
@@ -53,16 +55,17 @@ size_t Register<Key, Value>::getSize() const
 }
 
 template<typename Key, typename Value>
-bool Register<Key, Value>::push(Value rhs)
+bool Register<Key, Value>::push(int const rhs)
 {
-    int_fast8_t index = -1;
+    size_t index = 0;
 
-    index = std::stoi(rhs->toString());
-    if (index >= 0 && index <= _membmax - 1)
-        if (_reg[index] != nullptr) 
-        {
-            _reg[index] = rhs;
-            return true;
-        }
-    return false;
+    if (rhs < 0)
+        throw std::range_error("negative range");
+    index = rhs;
+    if (index <= _membmax - 1)
+    {
+        _reg[index] = nullptr; // replace by stack.top()
+        return true;
+    }
+    throw std::out_of_range("out of boundaries");
 }

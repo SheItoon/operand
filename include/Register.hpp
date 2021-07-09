@@ -9,15 +9,15 @@ class Register
 {
     public:
         Register();
-        Register(const int_fast8_t &&membmax);
+        Register(const size_t membmax);
         ~Register();
-        bool setSize(const int_fast8_t &&membmax);
-        Value const getValueAt(Value) const;
+        bool setSize(const size_t membmax);
+        Value getValueAt(int const) const;
         size_t getSize() const;
-        bool push(Value);
+        bool push(int const);
     private:
         std::map<Key, Value> _reg;
-        int_fast8_t _membmax;
+        size_t _membmax;
         bool _locked_size;
 };
 template class Register<int, IOperand const *>;
