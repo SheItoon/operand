@@ -14,7 +14,7 @@ jobs:
     - name: compile binary
       run: |
           make -j
-          make re -j
+          make re
           make fclean
   code-quality:
     runs-on: ubuntu-latest
