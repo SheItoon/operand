@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: compile binary
       run: |
-          make
-          make re
+          make -j
+          make re -j
           make fclean
   code-quality:
     runs-on: ubuntu-latest
