@@ -36,7 +36,7 @@ fclean:	clean
 	rm -rf $(OBJ) $(NAME)
 
 CI:
-	> $(foreach SOURCE, $(SOURCES), bash .CI.sh $(SOURCE) && ) true
+	> $(foreach SRC, $(SRC), bash .CI.sh $(SRC) && ) true
 #tests_run:
 
 .PHONY:	all re clean fclean CI#tests_run
