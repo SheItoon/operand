@@ -5,32 +5,32 @@
 #include <iostream>
 
 //TEMPLATE
-template <typename T>
+template <IsOperand T>
 Operand<T>::Operand(eOperandType type, const std::string &value)
 {
 	this->type = type;
 	this->value = value;
 }
 
-template <typename T>
+template <IsOperand T>
 Operand<T>::~Operand()
 {
 
 }
 
-template <typename T>
+template <IsOperand T>
 std::string const &Operand<T>::toString(void) const
 {
 	return this->value;
 }
 
-template <typename T>
+template <IsOperand T>
 eOperandType Operand<T>::getType(void) const
 {
 	return this->type;
 }
 
-template <typename T>
+template <IsOperand T>
 IOperand const *Operand<T>::operator+(IOperand const &rhs) const
 {
     IOperand *ret;
@@ -46,13 +46,13 @@ IOperand const *Operand<T>::operator+(IOperand const &rhs) const
     return ret;
 }
 
-template <typename T>
+template <IsOperand T>
 std::partial_ordering Operand<T>::operator<=>(IOperand const &rhs) const
 {
     return std::stod(value) <=> std::stod(rhs.toString());
 }
 
-template <typename T>
+template <IsOperand T>
 bool Operand<T>::operator==(IOperand const &rhs) const
 {
     return std::stod(value) == std::stod(rhs.toString());

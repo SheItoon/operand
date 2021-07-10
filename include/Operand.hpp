@@ -32,7 +32,13 @@ public:
 };
 
 template <typename T>
+    concept IsOperand = requires { std::is_arithmetic_v<T>; };
+
+/*
+template <typename T>
     requires std::is_arithmetic_v<T>
+*/
+template <IsOperand T>
 class Operand : public IOperand
 {
     public:
