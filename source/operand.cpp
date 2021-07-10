@@ -1,3 +1,4 @@
+//export module operand;
 #include "Operand.hpp"
 #include "Utils.hpp"
 #include <string>

@@ -32,8 +32,7 @@ public:
 };
 
 template <typename T>
-    concept IsOperand = requires { std::is_arithmetic_v<T>; };
-
+    concept IsOperand = std::is_arithmetic_v<T>;
 /*
 template <typename T>
     requires std::is_arithmetic_v<T>
@@ -66,7 +65,7 @@ template class Operand<int32_t>;
 template class Operand<float>;
 template class Operand<double>;
 */
-class Int8 : public Operand<int8_t>
+class Int8 : public Operand<int>
 {
 public:
     Int8(std::string const &value);
