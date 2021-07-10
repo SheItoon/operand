@@ -32,6 +32,7 @@ public:
 };
 
 template <typename T>
+    requires std::is_arithmetic_v<T>
 class Operand : public IOperand
 {
     public:
@@ -51,12 +52,14 @@ class Operand : public IOperand
         std::string value;
         eOperandType type;
 };
+
+/*
 template class Operand<int8_t>;
 template class Operand<int16_t>;
 template class Operand<int32_t>;
 template class Operand<float>;
 template class Operand<double>;
-
+*/
 class Int8 : public Operand<int8_t>
 {
 public:

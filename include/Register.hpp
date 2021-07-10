@@ -5,6 +5,7 @@
 #include <map>
 
 template<typename Key, typename Value>
+    requires std::is_arithmetic_v<Key> && std::is_pointer<Value>::value
 class Register
 {
     public:
@@ -20,4 +21,5 @@ class Register
         size_t _membmax;
         bool _locked_size;
 };
+
 template class Register<int, IOperand const *>;
